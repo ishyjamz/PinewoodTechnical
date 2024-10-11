@@ -1,8 +1,6 @@
 # PinewoodTechnical
 My solution to the technical assessment set by Pinewood Tech
 
-Here’s a sample `README.md` file for your project:
-
 ---
 
 # PinewoodTech Customer Management System
