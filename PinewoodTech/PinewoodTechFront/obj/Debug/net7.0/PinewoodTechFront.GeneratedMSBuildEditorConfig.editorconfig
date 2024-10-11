@@ -1,0 +1,53 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = PinewoodTechFront
+build_property.RootNamespace = PinewoodTechFront
+build_property.ProjectDir = /Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/Views/AddCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmlld3MvQWRkQ3VzdG9tZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/Views/Customers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmlld3MvQ3VzdG9tZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/Views/EditCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmlld3MvRWRpdEN1c3RvbWVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/Views/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmlld3MvRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/Views/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVmlld3MvSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-kgv7yzsp7n

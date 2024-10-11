@@ -1,0 +1,49 @@
+@page "/customer-add"
+@model PinewoodTechFront.Pages.AddCustomer
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="PinewoodTechFront/Pages/Styles/customer-add.css">
+</head>
+<body>
+<div class="container">
+    <div class="row text-center">
+        <div class="col">
+            <h1>Add Customer</h1>
+        </div>
+    </div>
+
+    <form method="post">
+        <div class="row justify-content-center mb-3">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="mb-1" for="name">Name</label>
+                    <input type="text" asp-for="Customer.Name" class="form-control" id="name" placeholder="Enter full name">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-4">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="mb-1" for="email">Email</label>
+                    <input type="email" asp-for="Customer.Email" class="form-control" id="email" placeholder="john.doe@example.com">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="PinewoodTechFront/Pages/Scripts/customer-add.js"></script>
+</body>
+</html>

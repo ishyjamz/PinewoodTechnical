@@ -1,0 +1,60 @@
+@page "/customer-list"
+@model Customers
+@{
+    ViewData["Title"] = "Customers";
+}
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <h1>Customers</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                <tr class="text-center">
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        Email
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var customer in Model.CustomerList)
+                {
+                    <tr class="text-center">
+                        <td>
+                            @customer.Name
+                        </td>
+                        <td>
+                            @customer.Email
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="/customer-edit">Edit</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a class=" btn btn-success" href="/customer-add">Add Customer</a>
+</div>
+<script src="PinewoodTechFront/Javascript/customer-list.js"></script>
+</body>
+</html>
