@@ -13,4 +13,6 @@ public interface ICustomerRepository
     public List<Customer> GetCustomers();
 
     public bool CustomerExists(int id);
+    
+    public bool DeleteCustomer(int customerId);
 }

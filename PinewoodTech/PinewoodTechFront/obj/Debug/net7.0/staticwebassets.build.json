@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Pmr2d9ualwzMhMM4Dh+tOw7iMdWGUSGWg9MIOeyHY3o=",
+  "Hash": "bd/Kio2pXR4SQufvOY5vK1ENE1duHLYY6skFSgnnZyA=",
   "Source": "PinewoodTechFront",
   "BasePath": "_content/PinewoodTechFront",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/wwwroot/js/customer-delete.js",
+      "SourceId": "PinewoodTechFront",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/wwwroot/",
+      "BasePath": "_content/PinewoodTechFront",
+      "RelativePath": "js/customer-delete.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/customer-delete.js"
     },
     {
       "Identity": "/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/wwwroot/js/site.js",

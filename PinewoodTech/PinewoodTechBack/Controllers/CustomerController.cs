@@ -1,112 +1,198 @@
+using System.Linq.Expressions;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PinewoodTechBack.Shared.Dtos;
 using PinewoodTechBack.Shared.Interfaces;
 using PinewoodTechBack.Shared.Models;
+using Microsoft.Extensions.Logging;
 
-namespace PinewoodTechBack.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class CustomerController : ControllerBase
+namespace PinewoodTechBack.Controllers
 {
-    private readonly ICustomerRepository _customerRepository;
-    private readonly IMapper _mapper;
-
-    public CustomerController(ICustomerRepository customerRepository, IMapper mapper)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class CustomerController : ControllerBase
     {
-        _customerRepository = customerRepository;
-        _mapper = mapper;
-    }
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IMapper _mapper;
+        private readonly ILogger<CustomerController> _logger;
 
-    [HttpGet]
-    [ProducesResponseType(200, Type = typeof(IEnumerable<Customer>))]
-    public IActionResult GetCustomers()
-    {
-        var customerList = _mapper.Map<List<CustomerDto>>(_customerRepository.GetCustomers());
-
-        if (!ModelState.IsValid)
+        public CustomerController(ICustomerRepository customerRepository, IMapper mapper,
+            ILogger<CustomerController> logger)
         {
-            return BadRequest(ModelState);
+            _customerRepository = customerRepository;
+            _mapper = mapper;
+            _logger = logger;
         }
 
-        return Ok(customerList);
-    }
-
-    [HttpGet("{id}")]
-    [ProducesResponseType(200, Type = typeof(Customer))]
-    [ProducesResponseType(400)]
-    public IActionResult GetCustomer(int id)
-    {
-        if (!_customerRepository.CustomerExists(id))
-            return NotFound();
-        
-        var customer = _mapper.Map<CustomerDto>(_customerRepository.GetCustomer(id));
-
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-        
-        return Ok(customer);
-    }
-
-    [HttpPost]
-    [ProducesResponseType(204)]
-    [ProducesResponseType(400)]
-    public IActionResult AddCustomer([FromBody] CustomerDto customerDto)
-    {
-        if (customerDto == null)
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<CustomerDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetCustomers()
         {
-            return BadRequest(ModelState);
-        }
-        
-        if (_customerRepository.CustomerExists(customerDto.Id))
-        {
-            ModelState.AddModelError("", "Customer with the name " 
-                                         + customerDto.Name + " already exists");
-            return StatusCode(422, ModelState);
-        }
-        
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-        
-        var customerMap = _mapper.Map<Customer>(customerDto);
+            try
+            {
+                var customerList = _mapper.Map<List<CustomerDto>>(_customerRepository.GetCustomers());
 
-        if (!_customerRepository.AddCustomer(customerMap))
-        {
-            ModelState.AddModelError("", "Did not save");
-            return StatusCode(422, ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                return Ok(customerList);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while fetching customers.");
+                return StatusCode(500, "Internal server error.");
+            }
         }
 
-        return Ok("Successfully added customer named: " + customerMap.Name);
-    }
-
-    [HttpPut("{customerId}")]
-    [ProducesResponseType(200)]
-    [ProducesResponseType(400)]
-    public IActionResult UpdateCustomer(int customerId, [FromBody] CustomerDto customerDto)
-    {
-        if (customerDto == null)
-            return BadRequest(ModelState);
-
-        if (customerId != customerDto.Id)
-            return BadRequest(ModelState);
-
-        if (!_customerRepository.CustomerExists(customerId))
-            return NotFound();
-
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        var customerMap = _mapper.Map<Customer>(customerDto);
-
-        if (!_customerRepository.UpdateCustomer(customerMap))
+        [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(CustomerDto))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult GetCustomer(int id)
         {
-            ModelState.AddModelError("", "Problem Saving...");
-            return StatusCode(500, ModelState);
+            try
+            {
+                if (!_customerRepository.CustomerExists(id))
+                    return NotFound($"Customer with id {id} not found.");
+
+                var customer = _mapper.Map<CustomerDto>(_customerRepository.GetCustomer(id));
+
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                return Ok(customer);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while fetching the customer with ID {Id}.", id);
+                return StatusCode(500, "Internal server error.");
+            }
         }
 
-        return Ok("Customer updated");
+        [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        public IActionResult AddCustomer([FromBody] CustomerDto customerDto)
+        {
+            try
+            {
+                if (customerDto == null)
+                {
+                    _logger.LogWarning("Received null CustomerDto in AddCustomer.");
+                    return BadRequest("CustomerDto cannot be null.");
+                }
+
+                if (_customerRepository.CustomerExists(customerDto.Id))
+                {
+                    ModelState.AddModelError("", "Customer with the name " + customerDto.Name + " already exists.");
+                    return StatusCode(422, ModelState);
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var customerMap = _mapper.Map<Customer>(customerDto);
+
+                if (!_customerRepository.AddCustomer(customerMap))
+                {
+                    ModelState.AddModelError("", "Could not save customer.");
+                    return StatusCode(500, ModelState);
+                }
+
+                return StatusCode(201, $"Successfully added customer: {customerMap.Name}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while adding a new customer.");
+                return StatusCode(500, "Internal server error.");
+            }
+        }
+
+        [HttpPut("{customerId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateCustomer(int customerId, [FromBody] CustomerDto customerDto)
+        {
+            try
+            {
+                if (customerDto == null)
+                {
+                    _logger.LogWarning("Received null CustomerDto in UpdateCustomer.");
+                    return BadRequest("CustomerDto cannot be null.");
+                }
+
+                if (customerId != customerDto.Id)
+                {
+                    _logger.LogWarning("Customer ID mismatch in UpdateCustomer.");
+                    return BadRequest("Customer ID mismatch.");
+                }
+
+                if (!_customerRepository.CustomerExists(customerId))
+                {
+                    return NotFound($"Customer with id {customerId} not found.");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var customerMap = _mapper.Map<Customer>(customerDto);
+
+                if (!_customerRepository.UpdateCustomer(customerMap))
+                {
+                    ModelState.AddModelError("", "Could not update customer.");
+                    return StatusCode(500, ModelState);
+                }
+
+                return Ok($"Customer with id {customerId} successfully updated.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while updating the customer with ID {Id}.", customerId);
+                return StatusCode(500, "Internal server error.");
+            }
+        }
+
+        // DELETE handler: Deletes the customer
+        [HttpDelete("{customerId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteCustomer(int customerId)
+        {
+            try
+            {
+                if (!_customerRepository.CustomerExists(customerId))
+                {
+                    return NotFound($"Customer with id {customerId} not found.");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                if (!_customerRepository.DeleteCustomer(customerId))
+                {
+                    ModelState.AddModelError("", "Could not delete customer.");
+                    return StatusCode(500, ModelState);
+                }
+
+                return Ok($"Customer with id {customerId} successfully deleted.");
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while deleting the customer with ID {Id}.", customerId);
+                return StatusCode(500, "Internal server error.");
+            }
+        }
     }
 }

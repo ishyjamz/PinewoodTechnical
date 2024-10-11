@@ -1,4 +1,4 @@
-@page "/customer-edit"
+@page "/customer-edit/{id}"
 @model PinewoodTechFront.Pages.Views.EditCustomer
 
 @{
@@ -9,33 +9,48 @@
 
 <html lang="en">
 <head>
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer - @Model.Customer.Name</title>
 </head>
 <body>
 <div class="container">
     <div class="row text-center">
         <div class="col">
-            <h1>EditCustomer</h1>
+            <h1>Edit Customer</h1>
         </div>
     </div>
 
     <form method="post">
+        <!-- Anti-forgery token -->
+        @Html.AntiForgeryToken()
+
+        <!-- Name input -->
         <div class="row justify-content-center mb-3">
             <div class="col-6">
                 <div class="form-group">
                     <label class="mb-1" for="name">Name</label>
-                    <input type="text" asp-for="Customer.Name" class="form-control" id="name" value="@Model.Customer.Name" placeholder="Enter full name" required>
+                    <input type="text" asp-for="Customer.Name" class="form-control" id="name" placeholder="Enter full name" required>
+                    <span asp-validation-for="Customer.Name" class="text-danger"></span>
                 </div>
             </div>
         </div>
+
+        <!-- Email input -->
         <div class="row justify-content-center mb-4">
             <div class="col-6">
                 <div class="form-group">
                     <label class="mb-1" for="email">Email</label>
-                    <input type="email" asp-for="Customer.Email" class="form-control" id="email" value="@Model.Customer.Email" placeholder="john.doe@example.com" required>
+                    <input type="email" asp-for="Customer.Email" class="form-control" id="email" placeholder="john.doe@example.com" required>
+                    <span asp-validation-for="Customer.Email" class="text-danger"></span>
                 </div>
             </div>
         </div>
+        
+        <!-- hidden input for id binding -->
+        <input type="hidden" asp-for="Customer.Id" />
+
+        <!-- Submit button -->
         <div class="row justify-content-center text-center">
             <div class="col-6">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -43,6 +58,11 @@
         </div>
     </form>
 </div>
-<script src="PinewoodTechFront/Pages/Scripts/customer-add.js"></script>
+
+<!-- Script for client-side validation -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
 </body>
 </html>

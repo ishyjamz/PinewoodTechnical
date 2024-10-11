@@ -10,6 +10,4 @@ public interface ICustomerHttpService
     public Task<bool> AddCustomerAsync(Customer customer);
     
     public Task<bool> UpdateCustomerAsync(int id,Customer customer);
-    
-    public Task<bool> DeleteCustomerAsync(int id);
 }

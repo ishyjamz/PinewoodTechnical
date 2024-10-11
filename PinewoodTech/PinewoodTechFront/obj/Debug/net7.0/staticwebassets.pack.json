@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/wwwroot/js/customer-delete.js",
+      "PackagePath": "staticwebassets/js/customer-delete.js"
+    },
+    {
       "Id": "/Users/ishtiak/Documents/PinewoodTechnical/PinewoodTech/PinewoodTechFront/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
