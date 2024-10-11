@@ -19,7 +19,7 @@ This is a full-stack Customer Management System built as part of a technical ass
 
 Tech Stack:
 
-Backend
+### Backend
 - **.NET Core 7.0** 
 - **ASP.NET Core Web API** 
 - **Entity Framework Core** for database interactions
@@ -29,20 +29,19 @@ Backend
 ### Frontend
 - **Razor Pages** with **C#**
 - **JavaScript** for UI interactions (Customer Deletion)
-- **Angular** for interactive UI
 
 ### Libraries & Tools
 - **Newtonsoft.Json** for JSON serialization/deserialization
 - **HttpClient** for API calls
 - **Bootstrap** for styling the UI
-- **Visual Studio** for development
+- **Jetbrains Rider** for development
 
-## Setup Instructions
+## Setup Instructions:
 
 ### Prerequisites
 - **.NET SDK** (version 7.0 or later)
 - **Node.js** and **npm** (for Angular)
-- **SQL Server** or another compatible database system
+- **PostgreSQL** or another compatible database system
 
 ### Backend Setup
 
